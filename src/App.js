@@ -1,25 +1,24 @@
-import logo from './logo.svg';
+import React from 'react';
+import VirtualTable from './VirtualTable'
 import './App.css';
+import { Table } from 'antd';
+const columns = [
+  { title: 'A', dataIndex: 'key', width: 150 },
+  { title: 'B', dataIndex: 'key',width: 150},
+  { title: 'C', dataIndex: 'key',width: 150},
+  { title: 'D', dataIndex: 'key',width: 150},
+  { title: 'E', dataIndex: 'key', width: 200 },
+];
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const data = Array.from({ length: 2000 }, (_, key) => ({ key }));
+
+const App = (props) => (
+
+  <Table
+   columns={columns}
+   dataSource={data}
+   pagination={false}
+   components={{ body:  ()=>(<VirtualTable {...{columns,dataSource:data}}></VirtualTable>) }}></Table>
+);
 
 export default App;
